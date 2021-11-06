@@ -71,8 +71,12 @@ if __name__ == '__main__':
 
     runners = [PythonRunner(args.prefix)]
 
-    with open('sources-metadata.yaml', 'r') as f:
+    with open(args.metadata[0], 'r') as f:
         metadata = yaml.safe_load(f)
+
+    if metadata == None:
+        print('No tests were runned')
+        exit(0)
 
     tests = defaultdict(list)
     code = dict()
@@ -87,7 +91,7 @@ if __name__ == '__main__':
                    for k, v in tests.items()], runners))
 
     if len(results) == 0:
-        print('No tests were runnedd')
+        print('No tests were runned')
         exit(0)
 
     if all(results):

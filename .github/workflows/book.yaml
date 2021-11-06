@@ -80,7 +80,7 @@ jobs:
         run: pandoc --pdf-engine=xelatex -o python-book.docx ${{ steps.files_list.outputs.files }}
             
       - name: Build .pdf
-        run: pandoc --pdf-engine=xelatex -o python-book.pdf ${{ steps.files_list.outputs.files }}
+        run: pandoc --pdf-engine=xelatex -V mainfont='Times New Roman' -o python-book.pdf ${{ steps.files_list.outputs.files }}
 
       - name: Create release
         uses: "marvinpinto/action-automatic-releases@latest"

@@ -53,11 +53,7 @@ jobs:
           python-version: 3.9
 
       - name: Install deps
-        run: |
-          pip3 install -r requirements.txt
-          sudo apt-get update
-          sudo apt-get install pandoc
-          sudo apt-get install texlive texlive-lang-all texlive-fonts-extra
+        run: pip3 install -r requirements.txt
 
       - name: Dowloaded sources
         uses: actions/download-artifact@v2
@@ -76,11 +72,10 @@ jobs:
         run: echo "::set-output name=files::$(printf '"%s" ' titlepage.md $(find chapters -name '*.md' | sort))"
 
       - name: Build .docx
-        run: pandoc -o python-book.docx ${{ steps.files_list.outputs.files }}
-            
-      - name: Build .pdf
-        run: pandoc -o python-book.pdf ${{ steps.files_list.outputs.files }}
-
+        uses: docker://pandoc/alpine-latex:2.14
+        with:
+          args: --output=python-book.docx ${{ steps.files_list.outputs.files }}
+          
       - name: Create release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -88,5 +83,4 @@ jobs:
           prerelease: false
           files: |
             python-book.docx
-            python-book.pdf
             sources.tar.gz

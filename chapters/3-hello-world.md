@@ -21,7 +21,8 @@ print("Hello World!")
 <!-- 
 runs: chapter_1/hello_world.py
 stdin: ''
-stdout: 'Hello World\n'
+stdout: >
+    Hello World!
 -->
 
 ```bash

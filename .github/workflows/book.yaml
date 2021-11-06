@@ -55,7 +55,10 @@ jobs:
       - name: Install deps
         run: |
           pip3 install -r requirements.txt
+          sudo apt-get update
           sudo apt-get install ttf-mscorefonts-installer
+          sudo apt-get install pandoc
+          sudo apt-get install texlive-xetex
 
       - name: Dowloaded sources
         uses: actions/download-artifact@v2
@@ -74,14 +77,10 @@ jobs:
         run: echo "::set-output name=files::$(printf '"%s" ' titlepage.md $(find chapters -name '*.md' | sort))"
 
       - name: Build .docx
-        uses: docker://pandoc/ubuntu-latex:2.14
-        with:
-          args: --pdf-engine=xelatex -V mainfont='Arial' --output=python-book.docx ${{ steps.files_list.outputs.files }}
+        run: pandoc --pdf-engine=xelatex -V --output=python-book.docx ${{ steps.files_list.outputs.files }}
             
       - name: Build .pdf
-        uses: docker://pandoc/ubuntu-latex:2.14
-        with:
-          args: --pdf-engine=xelatex -V mainfont='Arial' --output=python-book.pdf ${{ steps.files_list.outputs.files }}
+        run: pandoc --pdf-engine=xelatex -V --output=python-book.pdf ${{ steps.files_list.outputs.files }}
 
       - name: Create release
         uses: "marvinpinto/action-automatic-releases@latest"

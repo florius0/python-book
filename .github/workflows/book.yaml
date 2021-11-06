@@ -1,0 +1,92 @@
+name: Python Book CI
+
+on:
+  push:
+    branches: [main]
+    tags-ignore: ["v*"]
+  pull_request:
+    branches: [main]
+  create:
+    tags: ["v*"]
+    branches: main
+
+jobs:
+  build-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install deps
+        run: pip3 install -r requirements.txt
+
+      - name: Build sources
+        run: python3 buildscripts/sources.py $(find chapters -name '*.md' | sort) -o sources/
+
+      - name: Check examples
+        run: python3 buildscripts/check.py sources-metadata.yaml -p sources/
+
+      - name: Upload sources
+        uses: actions/upload-artifact@v2
+        with:
+          name: sources
+          path: sources.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    needs: [build-sources]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install deps
+        run: pip3 install -r requirements.txt
+
+      - name: Dowloaded sources
+        uses: actions/download-artifact@v2
+        with:
+          name: sources
+
+      - name: Build templates
+        run:
+          export book_version=${{ steps.get-latest-tag.outputs.tag }}
+          export python_version=$(python3 -V)
+          export os_version=$(uname -a)
+          j2 titlepage_template.md -o titlepage.md
+
+      - name: Get all .mds
+        id: files_list
+        run: echo "::set-output name=files::$(printf '"%s" ' titlpage.md chapters/**/*.md)"
+
+      - name: Build .pdf
+        uses: docker://pandoc/alpine-latex:2.14
+        with:
+          args: --pdf-engine=xelatex -V mainfont='Arial' --output=python-book.docx ${{ steps.files_list.outputs.files }}
+            
+      - name: Build .docx
+        uses: docker://pandoc/alpine-latex:2.14
+        with:
+          args: --pdf-engine=xelatex -V mainfont='Arial' --output=python-book.pdf ${{ steps.files_list.outputs.files }}
+
+      - name: Create release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            python-book.docx
+            python-book.pdf
+            sources.tar.gz

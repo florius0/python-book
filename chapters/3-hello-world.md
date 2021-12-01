@@ -11,7 +11,7 @@
 1. Создайте файл `chapter_1/hello_world.py` со следующим содержанием. обратите внимание, что в Python (согласно [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)) принято оставлять пустую строку в конце файла.
 
 <!--
-filename: chapter_1/hello_world.py
+filename: chapter_3/hello_world.py
 -->
 
 ```python
@@ -22,7 +22,7 @@ print('Hello World!')
 2. Запустите программу при помощи команды `python3 chapter_1/hello_world.py`. Последние 3 строки вашего терминала должны выглядеть примерно так:
 
 <!-- 
-runs: chapter_1/hello_world.py
+runs: chapter_3/hello_world.py
 stdin: ''
 stdout: >
     Hello World!
@@ -47,7 +47,7 @@ Hello World!
 1. Создайте файл `chapter_1/hello_anything.py` со следующим содержанием. обратите внимание, что в Python (согласно [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)) принято оставлять пустую строку в конце файла.
 
 <!--
-filename: chapter_1/hello_anything.py
+filename: chapter_3/hello_anything.py
 -->
 
 ```python
@@ -58,7 +58,7 @@ print('Hello,', input())
 2. Запустите программу при помощи команды `python3 chapter_1/hello_world.py`:
 
 <!-- 
-runs: chapter_1/hello_anything.py
+runs: chapter_3/hello_anything.py
 stdin: 'Joe'
 stdout: >
     Hello, Joe

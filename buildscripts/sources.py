@@ -8,9 +8,8 @@ import marko.ext.gfm
 m = marko.Markdown(extensions=[marko.ext.gfm.GFM])
 metadata_re = re.compile(r'<!--(.*?)-->', re.DOTALL)
 
-
 def extract(paths: str):
-    return sum(map(parse_md, paths), [])
+    return list(sorted(sum(map(parse_md, paths), []), key=lambda x: x.get('filename', x.get('runs', x))))
 
 
 def save_sources(extracted, to: str) -> str:
@@ -64,13 +63,14 @@ if __name__ == '__main__':
                         help='Markdown files. Supports globs')
 
     parser.add_argument('-o', metavar='OUTPUT', dest='output', type=str,
-                        required=True, help='directory to put source files to')
+                        required=True, help='directory to put source files to'
+                        'NOTE THAT ANYTHING AT GIVEN PATH WILL BE ERASED'
+                        )
 
     args = parser.parse_args()
 
     e = extract(args.paths)
 
-    s = save_sources(e, args.output)
     save_metadata(e, 'sources-metadata.yaml')
 
-    compress(s)
+    compress(save_sources(e, args.output))

@@ -61,7 +61,7 @@ def run_tests(tests: list, runners: list):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Cheks code extracted by sources.py')
+        description='Checks code extracted by sources.py')
     parser.add_argument('metadata', metavar='SOURCES_METADATA',
                         type=str, nargs=1, help='Path to source-metadata.yaml')
     parser.add_argument('-p', metavar='PREFIX', dest='prefix',

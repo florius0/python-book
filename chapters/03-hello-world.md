@@ -29,9 +29,9 @@ stdout: >
 -->
 
 ```bash
-> python3 chapter-1/hello-world.py
+$ python3 chapter-1/hello-world.py
 Hello World!
->
+$
 ```
 
 ## Разбор примера
@@ -65,10 +65,10 @@ stdout: >
 -->
 
 ```bash
-> python3 chapter-1/hello_anything.py
+$ python3 chapter-1/hello_anything.py
 Joe
 Hello, Joe
->
+$
 ```
 
 ## Задания

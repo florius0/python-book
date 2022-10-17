@@ -48,7 +48,7 @@ DEFAULT_RUNNER = Runner()
 
 def get_test_data(m: dict):
     s = m.get('stdout', 'BLOCK')
-    return {'stdin': m.get('stdin', ''), 'stdout': m.get('code', '') if s == 'BLOCK' else s, 'exitcode': m.get('exitcode', 0)}
+    return {'stdin': str(m.get('stdin', '')), 'stdout': str(m.get('code', '') if s == 'BLOCK' else s), 'exitcode': int(m.get('exitcode', 0))}
 
 
 def run_tests(tests: list, runners: list):

@@ -20,7 +20,7 @@
 Для дальнейших примеров создадим файл `mymodule.py` со следующим содержимым:
 
 <!--
-filename: chapters_15/mymodule.md
+filename: chapter_14/mymodule.md
 -->
 
 ```python
@@ -36,7 +36,7 @@ def say_goodbye():
 ### 1. Импорт модуля целиком
 
 <!--
-filename: chapters_15/import_whole_module.py
+filename: chapter_14/import_whole_module.py
 -->
 ```python
 import mymodule
@@ -49,7 +49,7 @@ mymodule.say_hello()
 ### 2. Импорт модуля под другим именем (алиасинг)
 
 <!--
-filename: chapters_15/import_module_with_alias.py
+filename: chapter_14/import_module_with_alias.py
 -->
 ```python
 #      Имя модуля
@@ -65,7 +65,7 @@ mm.say_hello()
 ### 3. Импорт конкретного класса/функции/переменной из модуля
 
 <!--
-filename: chapters_15/import_one_from_module.py
+filename: chapter_14/import_one_from_module.py
 -->
 ```python
 #    Имя модуля
@@ -81,7 +81,7 @@ say_hello()
 Для того, чтобы импортировать несколько классов/функций/переменных, их нужно перечислить через запятую.
 
 <!--
-filename: chapters_15/import_several_from_module.py
+filename: chapter_14/import_several_from_module.py
 -->
 ```python
 #    Имя модуля
@@ -97,7 +97,7 @@ say_goodbye()
 Так же, мы можем импортировать все классы/функции/переменные из модуля, используя звездочку `*` в качестве имени импортируемого объекта:
 
 <!--
-filename: chapters_15/import_all_from_module.py
+filename: chapter_14/import_all_from_module.py
 -->
 ```python
 #    Имя модуля
@@ -119,7 +119,7 @@ say_goodbye()
 Проиллюстрируем это на примере. Создадим два модуля: `no_name_check и name_check`. В первом модуле мы определим и вызовем функцию, а во втором модуле мы проверим значение переменной `__name__` и вызовем функцию только если оно равно `__main__`.
 
 <!--
-filename: chapters_15/no_name_check.py
+filename: chapter_14/no_name_check.py
 -->
 
 ```python
@@ -135,7 +135,7 @@ print(fib(100))
 ```
 
 <!--
-filename: chapters_15/name_check.py
+filename: chapter_14/name_check.py
 -->
 
 ```python
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 Теперь запустим модуль `no_name_check.py`:
 
 <!--
-runs: chapters_15/no_name_check.py
+runs: chapter_14/no_name_check.py
 stdout: |
     144
 -->
@@ -167,7 +167,7 @@ $ python3 no_name_check.py
 Все хорошо, функция `fib` вызвалась и мы получили результат. А теперь импортируем этот модуль и запустим программу:
 
 <!--
-filename: chapters_15/import_no_name_check.py
+filename: chapter_14/import_no_name_check.py
 -->
 
 ```python
@@ -177,7 +177,7 @@ print(fib(500))
 ```
 
 <!--
-runs: chapters_15/import_no_name_check.py
+runs: chapter_14/import_no_name_check.py
 stdout: |
     144
     610
@@ -192,7 +192,7 @@ $ python3 import_no_name_check.py
 Видим, что функция `fib` вызвалась дважды. Это произошло потому, что при импорте модуля, код модуля выполняется. Поэтому, чтобы функция `fib` вызывалась только при запуске модуля, а не при импорте, нужно проверять значение переменной `__name__`:
 
 <!--
-filename: chapters_15/import_name_check.py
+filename: chapter_14/import_name_check.py
 -->
 
 ```python
@@ -202,7 +202,7 @@ print(fib(500))
 ```
 
 <!--
-runs: chapters_15/name_check.py
+runs: chapter_14/name_check.py
 stdout: |
     144
 -->
@@ -213,7 +213,7 @@ $ python3 name_check.py
 ```
 
 <!--
-runs: chapters_15/import_name_check.py
+runs: chapter_14/import_name_check.py
 stdout: |
     610
 -->

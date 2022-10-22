@@ -17,7 +17,7 @@ from functools import reduce
 Опциональным третьим аргументом может быть начальное значение аккумулятора. Если начальное значение не указано, то первый элемент последовательности будет использован в качестве начального значения аккумулятора, а второй элемент последовательности будет использован в качестве первого аргумента функции.
 
 <!--
-filename: chapter_14/reduce.py
+filename: chapter_13/reduce.py
 -->
 
 ```python
@@ -27,7 +27,7 @@ print(reduce(lambda x, y: x + y, [1, 2, 3, 4, 5]))
 ```
 
 <!--
-runs: chapter_14/reduce.py
+runs: chapter_13/reduce.py
 stdout: 15
 -->
 
@@ -36,7 +36,7 @@ stdout: 15
 Функция reduce является аналогом цикла `for`:
 
 <!-- 
-filename: chapter_14/reduce_for.py
+filename: chapter_13/reduce_for.py
 -->
 
 ```python
@@ -48,7 +48,7 @@ print(x)
 ```
 
 <!--
-runs: chapter_14/reduce_for.py
+runs: chapter_13/reduce_for.py
 stdout: 15
 -->
 
@@ -57,7 +57,7 @@ stdout: 15
 Функция `sum` принимает последовательность и возвращает сумму всех элементов последовательности:
 
 <!-- 
-filename: chapter_14/sum.py
+filename: chapter_13/sum.py
 -->
 
 ```python
@@ -65,14 +65,14 @@ print(sum([1, 2, 3, 4, 5]))
 ```
 
 <!--
-runs: chapter_14/sum.py
+runs: chapter_13/sum.py
 stdout: 15
 -->
 
 Опциональным вторым аргументом функции `sum` может быть начальное значение аккумулятора:
 
 <!-- 
-filename: chapter_14/sum_start.py
+filename: chapter_13/sum_start.py
 -->
 
 ```python
@@ -80,7 +80,7 @@ sum([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]], [])
 ```
 
 <!--
-runs: chapter_14/sum_start.py
+runs: chapter_13/sum_start.py
 stdout: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 -->
 
@@ -89,7 +89,7 @@ stdout: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 Функция `sum` – менее _мощная_, нежели `reduce`. Это значит, что `sum` может быть выражена через `reduce`:
 
 <!--
-filename: chapter_14/sum_reduce.py
+filename: chapter_13/sum_reduce.py
 -->
 
 ```python
@@ -106,7 +106,7 @@ print(sum([1, 2, 3, 4, 5]))
 Возвращенная последовательность является итератором. Чтобы получить ее элементы, необходимо "пройти" этот итератор. Например привести итератор к списку:
 
 <!--
-filename: chapter_14/map.py
+filename: chapter_13/map.py
 -->
 
 ```python
@@ -116,7 +116,7 @@ print(list(x))
 ```
 
 <!--
-runs: chapter_14/map.py
+runs: chapter_13/map.py
 stdout: [2, 3, 4, 5, 6]
 -->
 
@@ -127,7 +127,7 @@ stdout: [2, 3, 4, 5, 6]
 Аналогично `map`, `filter` возвращает последовательность в виде итератора.
 
 <!--
-filename: chapter_14/filter.py
+filename: chapter_13/filter.py
 -->
 
 ```python
@@ -137,7 +137,7 @@ print(list(x))
 ```
 
 <!--
-runs: chapter_14/filter.py
+runs: chapter_13/filter.py
 stdout: [2, 4]
 -->
 
@@ -146,7 +146,7 @@ stdout: [2, 4]
 Функция `zip` принимает две последовательности и возвращает последовательность-итератор кортежей, содержащих элементы из обеих последовательностей.
 
 <!--
-filename: chapter_14/zip.py
+filename: chapter_13/zip.py
 -->
 
 ```python
@@ -156,7 +156,7 @@ print(list(x))
 ```
 
 <!--
-runs: chapter_14/zip.py
+runs: chapter_13/zip.py
 stdout: [(1, 6), (2, 7), (3, 8), (4, 9), (5, 10)]
 -->
 
@@ -165,7 +165,7 @@ stdout: [(1, 6), (2, 7), (3, 8), (4, 9), (5, 10)]
 Функция `sorted` принимает последовательность и возвращает отсортированную последовательность-итератор. По умолчанию сортировка происходит по возрастанию. Для сортировки по убыванию необходимо передать аргумент `reverse=True`. Так же опциональным параметром `key` можно передать функцию-ключ, на основе значений которой для каждого жэлемента будет происходить сортировка.
 
 <!--
-filename: chapter_14/sorted.py
+filename: chapter_13/sorted.py
 -->
 
 ```python
@@ -179,7 +179,7 @@ print(list(z))
 ```
 
 <!--
-runs: chapter_14/sorted.py
+runs: chapter_13/sorted.py
 stdout: > 
 [1, 2, 3, 4, 5]
 [5, 4, 3, 2, 1]
@@ -193,7 +193,7 @@ stdout: >
 Рекурсия – это вызов функции из самой себя. Рекурсивная функция должна иметь условие выхода, иначе она будет вызывать сама себя бесконечно.
 
 <!-- 
-filename: chapter_14/recursive.py
+filename: chapter_13/recursive.py
 -->
 
 ```python
@@ -207,14 +207,14 @@ print(factorial(5))
 ```
 
 <!--
-runs: chapter_14/recursive.py
+runs: chapter_13/recursive.py
 stdout: 120
 -->
 
 В Python, в отличии от большинства функциональных языков глубина рекурсии ограничена 1000 вызовами:
 
 <!--
-filename: chapter_14/recursive_limit.py
+filename: chapter_13/recursive_limit.py
 -->
 
 ```python
@@ -235,7 +235,7 @@ except RecursionError:
 ```
 
 <!--
-runs: chapter_14/recursive_limit.py
+runs: chapter_13/recursive_limit.py
 stdout: >
 1000
 RecursionError
@@ -245,7 +245,7 @@ RecursionError
 Лимит глубины рекурсии можно изменить, передав в функцию `sys.setrecursionlimit` новое значение.
 
 <!--
-filename: chapter_14/recursive_limit_increased.py
+filename: chapter_13/recursive_limit_increased.py
 -->
 
 ```python
@@ -262,13 +262,13 @@ f(1001)
 ```
 
 <!--
-runs: chapter_14/recursive_limit_increased.py
+runs: chapter_13/recursive_limit_increased.py
 -->
 
 Так же, любая рекурсивная функция может быть переписана с помощью цикла.
 
 <!--
-filename: chapter_14/recursive_to_loop.py
+filename: chapter_13/recursive_to_loop.py
 -->
 
 ```python
@@ -282,7 +282,7 @@ print(factorial(5))
 ```
 
 <!--
-runs: chapter_14/recursive_to_loop.py
+runs: chapter_13/recursive_to_loop.py
 stdout: 120
 -->
 

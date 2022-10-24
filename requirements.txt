@@ -1,3 +1,4 @@
 marko==1.1.0
 PyYAML==6.0
 j2cli==0.3.10
+numpy==1.23.4
